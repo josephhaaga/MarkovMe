@@ -156,7 +156,7 @@
             })
             $('.post_it').click(function(){
               FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'});
-              console.log($('.post_zone')[0].text());
+              console.log($('.post_zone').first().text());
               $('.new_post').show();
             })
             // var title = make_title(3 + Math.floor(3 * Math.random()));
