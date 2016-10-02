@@ -147,7 +147,8 @@
             };
 
             var make_title = function (min_length) {
-                word = choice(startwords);
+                // word = choice(startwords);
+                word = startwords[Math.floor(startwords.length * Math.random())];
                 var title = [word];
                 while (wordstats.hasOwnProperty(word)) {
                     var next_words = wordstats[word];
