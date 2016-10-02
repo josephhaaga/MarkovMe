@@ -43,9 +43,12 @@
 
               // BEGIN MARKOV
               var titles = [];
-
+              var j=0;
               for(var i=0; i<api_response.length; i++){
-                titles[i] = api_response[i]['message'];
+                if(api_response[i]['message']!=undefined){
+                  titles[j] = api_response[i]['message'];
+                  j++;
+                }
               }
 
             console.log(titles);
