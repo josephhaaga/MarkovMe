@@ -45,7 +45,7 @@
               var titles = [];
               var j=0;
               for(var i=0; i<api_response.length; i++){
-                if(api_response[i]['message']!='undefined'){
+                if(api_response[i]['message']!=undefined){
                   titles[j] = api_response[i]['message'];
                   j++;
                 }
@@ -91,8 +91,8 @@
               var title = make_title(3 + Math.floor(3 * Math.random()));
               $('body').append('<p>'+title+'</p>');
             })
-            var title = make_title(3 + Math.floor(3 * Math.random()));
-            $('body').append('<p>'+title+'</p>');
+            // var title = make_title(3 + Math.floor(3 * Math.random()));
+            // $('body').append('<p>'+title+'</p>');
               // END MARKOV
             }
           }
