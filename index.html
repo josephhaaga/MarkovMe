@@ -62,6 +62,16 @@
     // Only works after `FB.init` is called
     function myFacebookLogin() {
       FB.login(function(){
+        /* get user picture */
+        FB.api(
+            "/me/picture",
+            function (response) {
+              if (response && !response.error) {
+                console.log(response);
+              }
+            }
+        );
+
         FB.api(
           "me/posts?fields=message&limit=1500",
           function (response) {
@@ -79,7 +89,7 @@
                 }
               }
 
-            console.log(titles);
+            // console.log(titles);
 
             var terminals = {};
             var startwords = [];
