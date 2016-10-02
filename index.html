@@ -16,6 +16,7 @@
         background-color:#e9ebee;
         color:black;
         padding:1rem;
+        display:none;
       }
       button{
         background-color:#3b5998;
@@ -25,7 +26,7 @@
         padding:1rem;
       }
       .reveal_on_login{
-        display:none;
+        /*display:none;*/
       }
     </style>
     <link rel="stylesheet" src="../css/foundation.min.css">
@@ -114,7 +115,7 @@
                 if (title.length < min_length) return make_title(min_length);
                 return title.join(' ');
             };
-            $('.reveal_on_login').show();
+            $('.container').show();
             $('.login').hide();
             $('.generate_posts').click(function(){
               var title = make_title(3 + Math.floor(3 * Math.random()));
