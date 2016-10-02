@@ -26,14 +26,16 @@
     </script>
 
     <script>
+    var api_response = {};
     // Only works after `FB.init` is called
     function myFacebookLogin() {
       FB.login(function(){
         FB.api(
-          "/me/feed",
+          "me/posts?fields=message&limit=1000",
           function (response) {
             if (response && !response.error) {
               console.log(response);
+              api_response = response;
             }
           }
         ); 
