@@ -38,7 +38,7 @@
           "me/posts?fields=message&limit=100",
           function (response) {
             if (response && !response.error) {
-              console.log(response);
+              // console.log(response);
               api_response = response['data'];
 
               // BEGIN MARKOV
@@ -48,7 +48,7 @@
                 titles.push(api_response[i]['message']);
               }
 
-            
+            console.log(titles);
 
             var terminals = {};
             var startwords = [];
