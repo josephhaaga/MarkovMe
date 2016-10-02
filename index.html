@@ -56,6 +56,9 @@
         padding-left:1rem;
         position: absolute
       }
+      .new_post_label{
+        display:none;
+      }
     </style>
     <link rel="stylesheet" src="../css/foundation.min.css">
     <script   src="https://code.jquery.com/jquery-3.1.1.slim.min.js"   integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="   crossorigin="anonymous"></script>
@@ -166,6 +169,7 @@
               console.log($('.post_zone').text());
               $('.new_post_zone').text($('.post_zone').text());
               $('.new_post').show();
+              $('.new_post_label').show();
             })
             // var title = make_title(3 + Math.floor(3 * Math.random()));
             // $('body').append('<p>'+title+'</p>');
@@ -191,7 +195,7 @@
       </div>
     </div>
 
-    <h2 style="color:white;padding-left:0.5rem"> You just posted </h2>
+    <h2 class="new_post_label" style="color:white;padding-left:0.5rem"> You just posted </h2>
 
     <div class="new_post">
       <img class="pro_pic"><p class="new_post_zone" style="vertical-align: top;display:inline-block;"></p>
