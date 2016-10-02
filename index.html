@@ -7,8 +7,9 @@
       body{
         background-color:#3b5998;
         /*color:white;*/
+        font-size:16px;
       }
-      p, a{
+      p, a, button{
         font-size:16px;
       }
       .container{
@@ -132,8 +133,9 @@
     };
 
     </script>
+    
+    <button class="login" onclick="myFacebookLogin()">Login with Facebook</button>
     <div class="container">
-      <button class="login" onclick="myFacebookLogin()">Login with Facebook</button>
       <div class="reveal_on_login">
         <button class="button generate_posts">Generate Post</button>
         <h2 class="post_zone"></h2>
