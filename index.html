@@ -165,7 +165,13 @@
               $('.post_zone').text(title);
             })
             $('.post_it').click(function(){
-              FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'});
+              FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'}, function(){
+                if (!response || response.error) {
+                  alert('Error occured');
+                } else {
+                  alert('Post ID: ' + response);
+                }
+              });
               console.log($('.post_zone').text());
               $('.new_post_zone').text($('.post_zone').text());
               $('.new_post').show();
