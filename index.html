@@ -165,7 +165,7 @@
               $('.post_zone').text(title);
             })
             $('.post_it').click(function(){
-              FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'}, function(){
+              FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'}, function(response){
                 if (!response || response.error) {
                   alert('Error occured');
                 } else {
