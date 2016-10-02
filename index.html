@@ -21,6 +21,9 @@
         font-weight:bold;
         font-family:'Helvetica','Arial',sans-serif;
       }
+      .reveal_on_login{
+        display:none;
+      }
     </style>
     <link rel="stylesheet" src="../css/foundation.min.css">
     <script   src="https://code.jquery.com/jquery-3.1.1.slim.min.js"   integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="   crossorigin="anonymous"></script>
@@ -108,6 +111,8 @@
                 if (title.length < min_length) return make_title(min_length);
                 return title.join(' ');
             };
+            $('.reveal_on_login').show();
+            $('.login').hide();
             $('.generate_posts').click(function(){
               var title = make_title(3 + Math.floor(3 * Math.random()));
               $('.post_zone').text(title);
@@ -128,10 +133,12 @@
 
     </script>
     <div class="container">
-      <button onclick="myFacebookLogin()">Login with Facebook</button>
-      <button class="button generate_posts">Generate Post</button>
-      <h2 class="post_zone"></h2>
-      <button class="post_it">Post to Facebook</button>
+      <button class="login" onclick="myFacebookLogin()">Login with Facebook</button>
+      <div class="reveal_on_login">
+        <button class="button generate_posts">Generate Post</button>
+        <h2 class="post_zone"></h2>
+        <button class="post_it">Post to Facebook</button>
+      </div>
     </div>
 
   </body>
