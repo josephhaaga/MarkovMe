@@ -114,6 +114,7 @@
             })
             $('post_it').click(function(){
               FB.api('/me/feed', 'post', {message: $('.post_zone').text()});
+              console.log($('.post_zone').text());
             })
             // var title = make_title(3 + Math.floor(3 * Math.random()));
             // $('body').append('<p>'+title+'</p>');
