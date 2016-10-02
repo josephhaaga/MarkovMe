@@ -168,7 +168,7 @@
               FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'}, function(response){
                 if (!response || response.error) {
                   alert('Error occured');
-                  alert(response);
+                  console.log(response);
                 } else {
                   alert('Post ID: ' + response);
                 }
