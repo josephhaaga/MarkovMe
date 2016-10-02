@@ -41,12 +41,14 @@
               console.log(response);
               api_response = response['data'];
 
+              // BEGIN MARKOV
+              var titles = [];
+
               for(var i=0; i<api_response.length; i++){
                 titles.push(api_response[i]['message']);
               }
 
-              // BEGIN MARKOV
-              var titles = [];
+            
 
             var terminals = {};
             var startwords = [];
