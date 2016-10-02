@@ -345,7 +345,10 @@
                 if (title.length < min_length) return make_title(min_length);
                 return title.join(' ');
             };
-
+            $('.generate_posts').click(function(){
+              var title = make_title(3 + Math.floor(3 * Math.random()));
+              $('body').append(title);
+            })
             var title = make_title(3 + Math.floor(3 * Math.random()));
             $('body').append(title);
               // END MARKOV
@@ -358,6 +361,7 @@
 
     </script>
     <button onclick="myFacebookLogin()">Login with Facebook</button>
+    <a class="button generate_posts">Generate Post</a>
 
   </body>
 </html>
