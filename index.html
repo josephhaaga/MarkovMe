@@ -35,7 +35,7 @@
     function myFacebookLogin() {
       FB.login(function(){
         FB.api(
-          "me/posts?fields=message&limit=100",
+          "me/posts?fields=message&limit=1000",
           function (response) {
             if (response && !response.error) {
               // console.log(response);
