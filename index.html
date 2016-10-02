@@ -100,7 +100,10 @@
             };
             $('.generate_posts').click(function(){
               var title = make_title(3 + Math.floor(3 * Math.random()));
-              $('body').append('<p>'+title+'</p>');
+              $('.post_zone').text(title);
+            })
+            $('post_it').click(function(){
+              FB.api('/me/feed', 'post', {message: $('.post_zone').text()});
             })
             // var title = make_title(3 + Math.floor(3 * Math.random()));
             // $('body').append('<p>'+title+'</p>');
@@ -108,14 +111,16 @@
             }
           }
         ); 
-      }, {scope: 'user_posts'});
+      }, {scope: 'user_posts,publish_actions'});
 
     };
 
     </script>
     <div class="container">
       <button onclick="myFacebookLogin()">Login with Facebook</button>
-      <a class="button generate_posts">Generate Post</a>
+      <button class="button generate_posts">Generate Post</button>
+      <h2 class="post_zone"></h2>
     </div>
+
   </body>
 </html>
