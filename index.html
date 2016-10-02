@@ -171,13 +171,12 @@
                   alert('Error occured');
                   console.log(response);
                 } else {
-                  alert('Post ID: ' + response);
+                    console.log($('.post_zone').text());
+                    $('.new_post_zone').text($('.post_zone').text());
+                    $('.new_post').show();
+                    $('.new_post_label').show(); 
                 }
               });
-              console.log($('.post_zone').text());
-              $('.new_post_zone').text($('.post_zone').text());
-              $('.new_post').show();
-              $('.new_post_label').show();
             })
             // var title = make_title(3 + Math.floor(3 * Math.random()));
             // $('body').append('<p>'+title+'</p>');
