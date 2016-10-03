@@ -29,11 +29,85 @@
           FB.api(
             "me/posts?fields=message&limit=200",
             function (response) {
-              if (response && !response.error) {
-                // console.log(response);
-                console.log(response['data']);
+            if (response && !response.error) {
+              // console.log(response);
+              api_response = response['data'];
+
+              // BEGIN MARKOV
+              var titles = [];
+              var j=0;
+              for(var i=0; i<api_response.length; i++){
+                if(api_response[i]['message']!=undefined){
+                  titles[j] = api_response[i]['message'];
+                  j++;
+                }
               }
+
+              
+
+            console.log(titles);
+
+            var terminals = {};
+            var startwords = [];
+            var wordstats = {};
+
+            for (var i = 0; i < titles.length; i++) {
+                var words = titles[i].split(' ');
+                terminals[words[words.length-1]] = true;
+                startwords.push(words[0]);
+                for (var j = 0; j < words.length - 1; j++) {
+                    if (wordstats.hasOwnProperty(words[j])) {
+                        wordstats[words[j]].push(words[j+1]);
+                    } else {
+                        wordstats[words[j]] = [words[j+1]];
+                    }
+                }
             }
+
+            var choice = function (a) {
+                var i = Math.floor(a.length * Math.random());
+                return a[i];
+            };
+
+            var make_title = function (min_length) {
+                // word = choice(startwords);
+                word = startwords[Math.floor(startwords.length * Math.random())];
+                var title = [word];
+                while (wordstats.hasOwnProperty(word)) {
+                    var next_words = wordstats[word];
+                    word = choice(next_words);
+                    title.push(word);
+                    if (title.length > min_length && terminals.hasOwnProperty(word)) break;
+                }
+                // if (title.length < min_length) return make_title(min_length);
+                return title.join(' ');
+            };
+            $('.container').show();
+            $('.login').hide();
+            $('.generate_posts').click(function(){
+              console.log('Generating status');
+              var title = make_title(3 + Math.floor(3 * Math.random()));
+              $('.post_zone').text(title);
+            })
+            $('.post_it').click(function(){
+              // FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'}, function(response){
+              FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'http://joehaaga.xyz/MarkovMe'}, function(response){
+                if (!response || response.error) {
+                  alert('Error occured');
+                  console.log(response);
+                } else {
+                    console.log($('.post_zone').text());
+                    $('.new_post_zone').text($('.post_zone').text());
+                    $('.new_post').show();
+                    $('.new_post_label').show(); 
+                }
+              });
+            })
+            // var title = make_title(3 + Math.floor(3 * Math.random()));
+            // $('body').append('<p>'+title+'</p>');
+              // END MARKOV
+            }
+          }
             );
         },  {scope: 'user_posts,publish_actions'});
       }
