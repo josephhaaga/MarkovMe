@@ -143,7 +143,7 @@
 
             function make_title(min_length) {
                 // word = choice(startwords);
-                word = startwords[Math.floor(startwords.length * Math.random())];
+                var word = startwords[Math.floor(startwords.length * Math.random())];
                 var title = [word];
                 while (wordstats.hasOwnProperty(word)) {
                     var next_words = wordstats[word];
