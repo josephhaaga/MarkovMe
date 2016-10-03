@@ -3,64 +3,6 @@
     <!-- <link rel="stylesheet" src="https://cdnjs.cloudflare.com/ajax/libs/foundation/6.2.3/foundation.min.css"> -->
   </head>
   <body>
-    <style>
-      body{
-        background-color:#3b5998;
-        /*color:white;*/
-        font-size:16px;
-      }
-      p, a, button{
-        font-size:16px;
-      }
-      .container{
-        background-color:#e9ebee;
-        color:black;
-        padding:1rem;
-        display:none;
-      }
-      button{
-        background-color:#3b5998;
-        color:white;
-        font-weight:bold;
-        font-family:'Helvetica','Arial',sans-serif;
-        padding:1rem;
-      }
-      .reveal_on_login{
-        /*display:none;*/
-      }
-      .content_area{
-        padding:2rem;
-        margin:1rem;
-        background-color:white;
-        border-top:1px lightgray solid;
-        border-bottom:1px lightgray solid;
-      }
-      .pro_pic{
-        width:4rem;
-        height:auto;
-      }
-      .post_zone{
-        width:80%;
-        /*float:right;*/
-        display:inline-block;
-        vertical-align: top;
-      }
-      .new_post{
-        display:none;
-        background-color:white;
-        margin: 2rem;
-        padding: 2rem;
-        position: relative;
-      }
-      .new_post_zone{
-        padding-left:1rem;
-        position: absolute
-      }
-      .new_post_label{
-        display:none;
-      }
-    </style>
-    <link rel="stylesheet" src="../css/foundation.min.css">
     <script   src="https://code.jquery.com/jquery-3.1.1.slim.min.js"   integrity="sha256-/SIrNqv8h6QGKDuNoLGA4iret+kyesCkHGzVUUV0shc="   crossorigin="anonymous"></script>
     <!-- <script src="../js/vendor/foundation.min.js"></script> -->
     <script>
@@ -73,140 +15,18 @@
         FB.AppEvents.logPageView();
       };
 
-      (function(d, s, id){
-       var js, fjs = d.getElementsByTagName(s)[0];
-       if (d.getElementById(id)) {return;}
-       js = d.createElement(s); js.id = id;
-       js.src = "https://connect.facebook.net/en_US/sdk.js";
-       fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
-
-      // FB.ui(
-      //  {
-      //   method: 'share',
-      //   href: 'https://developers.facebook.com/docs/'
-      // }, function(response){});
-    </script>
-
-    <script>
-    var api_response = {};
-    var pro_pic_address = '';
-    // Only works after `FB.init` is called
-    function myFacebookLogin() {
-      FB.login(function(){
-        /* get user picture */
-        FB.api(
-            "/me/picture",
+      function myFacebookLogin() {
+        FB.login(function(){
+          FB.api(
+            "me/posts?fields=message&limit=200",
             function (response) {
               if (response && !response.error) {
-                pro_pic_address = response['data']['url'];
-                $('.pro_pic').attr('src',pro_pic_address);
+                // console.log(response);
+                console.log(response['data']);
               }
             }
-        );
-
-        FB.api(
-          "me/posts?fields=message&limit=200",
-          function (response) {
-            if (response && !response.error) {
-              // console.log(response);
-              api_response = response['data'];
-
-              // BEGIN MARKOV
-              var titles = [];
-              var j=0;
-              for(var i=0; i<api_response.length; i++){
-                if(api_response[i]['message']!=undefined){
-                  titles[j] = api_response[i]['message'];
-                  j++;
-                }
-              }
-
-            // console.log(titles);
-
-            var terminals = {};
-            var startwords = [];
-            var wordstats = {};
-
-            for (var i = 0; i < titles.length; i++) {
-                var words = titles[i].split(' ');
-                terminals[words[words.length-1]] = true;
-                startwords.push(words[0]);
-                for (var j = 0; j < words.length - 1; j++) {
-                    if (wordstats.hasOwnProperty(words[j])) {
-                        wordstats[words[j]].push(words[j+1]);
-                    } else {
-                        wordstats[words[j]] = [words[j+1]];
-                    }
-                }
-            }
-
-            var choice = function (a) {
-                var i = Math.floor(a.length * Math.random());
-                return a[i];
-            };
-
-            var make_title = function (min_length) {
-                word = choice(startwords);
-                var title = [word];
-                while (wordstats.hasOwnProperty(word)) {
-                    var next_words = wordstats[word];
-                    word = choice(next_words);
-                    title.push(word);
-                    if (title.length > min_length && terminals.hasOwnProperty(word)) break;
-                }
-                if (title.length < min_length) return make_title(min_length);
-                return title.join(' ');
-            };
-            $('.container').show();
-            $('.login').hide();
-            $('.generate_posts').click(function(){
-              var title = make_title(3 + Math.floor(3 * Math.random()));
-              $('.post_zone').text(title);
-            })
-            $('.post_it').click(function(){
-              // FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'}, function(response){
-              FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'http://joehaaga.xyz/MarkovMe'}, function(response){
-                if (!response || response.error) {
-                  alert('Error occured');
-                  console.log(response);
-                } else {
-                    console.log($('.post_zone').text());
-                    $('.new_post_zone').text($('.post_zone').text());
-                    $('.new_post').show();
-                    $('.new_post_label').show(); 
-                }
-              });
-            })
-            // var title = make_title(3 + Math.floor(3 * Math.random()));
-            // $('body').append('<p>'+title+'</p>');
-              // END MARKOV
-            }
-          }
-        ); 
-      }, {scope: 'user_posts,publish_actions'});
-
-    };
-
+            );
+        });
     </script>
-
-    <button class="login" onclick="myFacebookLogin()">Login with Facebook</button>
-    <div class="container">
-      <div class="reveal_on_login">
-        <button class="button generate_posts">Generate Post</button>
-        <div class="content_area">
-          <img class="pro_pic" src="" /> 
-          <p class="post_zone"></p>
-        </div>
-        <button class="post_it">Post to Facebook</button>
-      </div>
-    </div>
-
-    <h2 class="new_post_label" style="color:white;padding-left:0.5rem"> You just posted </h2>
-
-    <div class="new_post">
-      <img class="pro_pic"><p class="new_post_zone" style="vertical-align: top;display:inline-block;"></p>
-      <a style="color:blue;bottom:0.5rem;left:8rem;position:absolute">Like</a><a style="color:blue;bottom:0.5rem;left:12rem;position:absolute">Share</a>
-    </div>
   </body>
 </html>
