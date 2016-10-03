@@ -45,7 +45,7 @@
 
               
 
-            console.log(titles);
+            // console.log(titles);
 
             var terminals = {};
             var startwords = [];
@@ -82,6 +82,9 @@
                 // if (title.length < min_length) return make_title(min_length);
                 return title.join(' ');
             };
+
+
+            console.log(make_title(5));
             $('.container').show();
             $('.login').hide();
             $('.generate_posts').click(function(){
