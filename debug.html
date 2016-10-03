@@ -147,8 +147,7 @@
             };
 
             var make_title = function (min_length) {
-                // word = choice(startwords);
-                word = startwords[Math.floor(startwords.length * Math.random())];
+                word = choice(startwords);
                 var title = [word];
                 while (wordstats.hasOwnProperty(word)) {
                     var next_words = wordstats[word];
@@ -156,7 +155,7 @@
                     title.push(word);
                     if (title.length > min_length && terminals.hasOwnProperty(word)) break;
                 }
-                // if (title.length < min_length) return make_title(min_length);
+                if (title.length < min_length) return make_title(min_length);
                 return title.join(' ');
             };
             $('.container').show();
@@ -209,15 +208,5 @@
       <img class="pro_pic"><p class="new_post_zone" style="vertical-align: top;display:inline-block;"></p>
       <a style="color:blue;bottom:0.5rem;left:8rem;position:absolute">Like</a><a style="color:blue;bottom:0.5rem;left:12rem;position:absolute">Share</a>
     </div>
-  <script>
-    (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-    })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-    ga('create', 'UA-66264514-2', 'auto');
-    ga('send', 'pageview');
-
-  </script>
   </body>
 </html>
