@@ -88,7 +88,7 @@
         FB.login(function(){
 
           var api_response = [];
-
+          var pro_pic_address = "";
           /* get user picture */
           FB.api(
               "/me/picture",
@@ -158,11 +158,11 @@
             };
 
 
-            console.log(make_title(5));
+            // console.log(make_title(5));
             $(".container").show();
             $(".login").hide();
             $(".generate_posts").click(function(){
-              console.log("Generating status");
+              // console.log("Generating status");
               var title = make_title(3 + Math.floor(3 * Math.random()));
               $(".post_zone").text(title);
             })
@@ -171,9 +171,9 @@
               FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
                 if (!response || response.error) {
                   alert("Error occured");
-                  console.log(response);
+                  // console.log(response);
                 } else {
-                    console.log($(".post_zone").text());
+                    // console.log($(".post_zone").text());
                     $(".new_post_zone").text($(".post_zone").text());
                     $(".new_post").show();
                     $(".new_post_label").show(); 
