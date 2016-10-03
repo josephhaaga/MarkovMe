@@ -162,6 +162,7 @@
             $('.container').show();
             $('.login').hide();
             $('.generate_posts').click(function(){
+              console.log('Generating status');
               var title = make_title(3 + Math.floor(3 * Math.random()));
               $('.post_zone').text(title);
             })
