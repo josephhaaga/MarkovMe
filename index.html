@@ -22,7 +22,7 @@
         background-color:#3b5998;
         color:white;
         font-weight:bold;
-        font-family:'Helvetica','Arial',sans-serif;
+        font-family:"Helvetica","Arial",sans-serif;
         padding:1rem;
       }
       .reveal_on_login{
@@ -68,9 +68,9 @@
     <script>
       window.fbAsyncInit = function() {
         FB.init({
-          appId      : '1784286381853277',
+          appId      : "1784286381853277",
           xfbml      : true,
-          version    : 'v2.7'
+          version    : "v2.7"
         });
         FB.AppEvents.logPageView();
       };
@@ -81,19 +81,21 @@
        js = d.createElement(s); js.id = id;
        js.src = "https://connect.facebook.net/en_US/sdk.js";
        fjs.parentNode.insertBefore(js, fjs);
-     }(document, 'script', 'facebook-jssdk'));
+     }(document, "script", "facebook-jssdk"));
 
 
       function myFacebookLogin() {
         FB.login(function(){
+
+          var api_response = [];
 
           /* get user picture */
           FB.api(
               "/me/picture",
               function (response) {
                 if (response && !response.error) {
-                  pro_pic_address = response['data']['url'];
-                  $('.pro_pic').attr('src',pro_pic_address);
+                  pro_pic_address = response["data"]["url"];
+                  $(".pro_pic").attr("src",pro_pic_address);
                 }
               }
           );
@@ -103,14 +105,14 @@
             function (response) {
             if (response && !response.error) {
               // console.log(response);
-              api_response = response['data'];
+              api_response = response["data"];
 
               // BEGIN MARKOV
               var titles = [];
               var j=0;
               for(var i=0; i<api_response.length; i++){
-                if(api_response[i]['message']!=undefined){
-                  titles[j] = api_response[i]['message'];
+                if(api_response[i]["message"]!=undefined){
+                  titles[j] = api_response[i]["message"];
                   j++;
                 }
               }
@@ -124,7 +126,7 @@
             var wordstats = {};
 
             for (var i = 0; i < titles.length; i++) {
-                var words = titles[i].split(' ');
+                var words = titles[i].split(" ");
                 terminals[words[words.length-1]] = true;
                 startwords.push(words[0]);
                 for (var j = 0; j < words.length - 1; j++) {
@@ -152,39 +154,39 @@
                     if (title.length > min_length && terminals.hasOwnProperty(word)) break;
                 }
                 // if (title.length < min_length) return make_title(min_length);
-                return title.join(' ');
+                return title.join(" ");
             };
 
 
             console.log(make_title(5));
-            $('.container').show();
-            $('.login').hide();
-            $('.generate_posts').click(function(){
-              console.log('Generating status');
+            $(".container").show();
+            $(".login").hide();
+            $(".generate_posts").click(function(){
+              console.log("Generating status");
               var title = make_title(3 + Math.floor(3 * Math.random()));
-              $('.post_zone').text(title);
+              $(".post_zone").text(title);
             })
-            $('.post_it').click(function(){
-              // FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'MarkovMe'}, function(response){
-              FB.api('/me/feed', 'post', {message: $('.post_zone').text(), source: 'http://joehaaga.xyz/MarkovMe'}, function(response){
+            $(".post_it").click(function(){
+              // FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "MarkovMe"}, function(response){
+              FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
                 if (!response || response.error) {
-                  alert('Error occured');
+                  alert("Error occured");
                   console.log(response);
                 } else {
-                    console.log($('.post_zone').text());
-                    $('.new_post_zone').text($('.post_zone').text());
-                    $('.new_post').show();
-                    $('.new_post_label').show(); 
+                    console.log($(".post_zone").text());
+                    $(".new_post_zone").text($(".post_zone").text());
+                    $(".new_post").show();
+                    $(".new_post_label").show(); 
                 }
               });
             })
             // var title = make_title(3 + Math.floor(3 * Math.random()));
-            // $('body').append('<p>'+title+'</p>');
+            // $("body").append("<p>"+title+"</p>");
               // END MARKOV
             }
           }
             );
-        },  {scope: 'user_posts,publish_actions'});
+        },  {scope: "user_posts,publish_actions"});
       }
     </script>
 
@@ -208,13 +210,13 @@
       <a style="color:blue;bottom:0.5rem;left:8rem;position:absolute">Like</a><a style="color:blue;bottom:0.5rem;left:12rem;position:absolute">Share</a>
     </div>
     <script>
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (function(i,s,o,g,r,a,m){i["GoogleAnalyticsObject"]=r;i[r]=i[r]||function(){
       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+      })(window,document,"script","https://www.google-analytics.com/analytics.js","ga");
 
-      ga('create', 'UA-66264514-2', 'auto');
-      ga('send', 'pageview');
+      ga("create", "UA-66264514-2", "auto");
+      ga("send", "pageview");
 
     </script>
 
