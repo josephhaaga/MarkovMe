@@ -89,6 +89,9 @@
     </div>
 
     <script>
+
+      var api_response = [];
+    
       window.fbAsyncInit = function() {
         FB.init({
           appId      : "1784286381853277",
@@ -109,8 +112,6 @@
 
       function myFacebookLogin() {
         FB.login(function(){
-
-          var api_response = [];
           var pro_pic_address = "";
           /* get user picture */
           FB.api(
