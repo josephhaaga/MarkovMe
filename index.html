@@ -156,20 +156,20 @@
                 var output = model.generate(3 + Math.floor(3 * Math.random()));
                 $(".post_zone").text(output);
               })
-              $(".post_it").click(function(){
-                // FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "MarkovMe"}, function(response){
-                  FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
-                    if (!response || response.error) {
-                      alert("Error occured");
-                    // console.log(response);
-                  } else {
-                      // console.log($(".post_zone").text());
-                      $(".new_post_zone").text($(".post_zone").text());
-                      $(".new_post").show();
-                      $(".new_post_label").show(); 
-                    }
-                  });
-                });
+              // $(".post_it").click(function(){
+              //   // FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "MarkovMe"}, function(response){
+              //     FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
+              //       if (!response || response.error) {
+              //         alert("Error occured");
+              //       // console.log(response);
+              //     } else {
+              //         // console.log($(".post_zone").text());
+              //         $(".new_post_zone").text($(".post_zone").text());
+              //         $(".new_post").show();
+              //         $(".new_post_label").show(); 
+              //       }
+              //     });
+              //   });
               // var title = make_title(3 + Math.floor(3 * Math.random()));
               // $("body").append("<p>"+title+"</p>");
                 // END MARKOV
