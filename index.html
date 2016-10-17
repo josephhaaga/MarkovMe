@@ -131,16 +131,21 @@
                 // console.log(response);
                 api_response = response["data"];
 
+                average_length = 0
+
                 // BEGIN MARKOV
                 var titles = [];
                 var j=0;
                 for(var i=0; i<api_response.length; i++){
                   if(api_response[i]["message"]!=undefined){
+                    average_length = api_response[i]["message"].split(" ");
                     console.log(api_response[i]["message"])
                     titles[j] = api_response[i]["message"];
                     j++;
                   }
                 }
+
+                average_length /= api_response.length;
 
                 master = titles.join(" ");
                 mod = model.train(master,false);
@@ -156,22 +161,22 @@
                 var output = model.generate(3 + Math.floor(3 * Math.random()));
                 $(".post_zone").text(output);
               })
-              // $(".post_it").click(function(){
-              //   // FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "MarkovMe"}, function(response){
-              //     FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
-              //       if (!response || response.error) {
-              //         alert("Error occured");
-              //       // console.log(response);
-              //     } else {
-              //         // console.log($(".post_zone").text());
-              //         $(".new_post_zone").text($(".post_zone").text());
-              //         $(".new_post").show();
-              //         $(".new_post_label").show(); 
-              //       }
-              //     });
-              //   });
+              $(".post_it").click(function(){
+                // FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "MarkovMe"}, function(response){
+                  FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
+                    if (!response || response.error) {
+                      alert("Error occured");
+                    // console.log(response);
+                  } else {
+                      // console.log($(".post_zone").text());
+                      $(".new_post_zone").text($(".post_zone").text());
+                      $(".new_post").show();
+                      $(".new_post_label").show(); 
+                    }
+                  });
+                });
               // var title = make_title(3 + Math.floor(3 * Math.random()));
-              // $("body").append("<p>"+title+"</p>");
+              $("body").append("<p>"+title+"</p>");
                 // END MARKOV
             }
           }
