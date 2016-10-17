@@ -131,14 +131,14 @@
                 // console.log(response);
                 api_response = response["data"];
 
-                average_length = 0
+                average_length = 0;
 
                 // BEGIN MARKOV
                 var titles = [];
                 var j=0;
                 for(var i=0; i<api_response.length; i++){
                   if(api_response[i]["message"]!=undefined){
-                    average_length = api_response[i]["message"].split(" ");
+                    average_length += api_response[i]["message"].split(" ").length;
                     console.log(api_response[i]["message"])
                     titles[j] = api_response[i]["message"];
                     j++;
