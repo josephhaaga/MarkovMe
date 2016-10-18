@@ -158,7 +158,7 @@
 
                 // var title = make_title(3 + Math.floor(3 * Math.random()));
                 // $(".post_zone").text(title);
-                var output = model.generate(Math.floor(average_length) + Math.floor(average_length * Math.random()* 10));
+                var output = model.generate(Math.floor(average_length) + Math.floor(average_length * Math.random()));
                 $(".post_zone").text(output);
               })
               $(".post_it").click(function(){
@@ -179,9 +179,11 @@
                   FB.ui({
                     method: 'feed',
                     link: 'http://joehaaga.xyz/MarkovMe/',
+                    name: 'MarkovMe',
                     caption: $(".post_zone").text(),
+                    description: 'A status automagically generated from my posts'
                   }, function(response){
-                    window.alert("Status posted!");
+                    // window.alert("Status posted!");
                   });
 
 
