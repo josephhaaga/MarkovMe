@@ -162,18 +162,29 @@
                 $(".post_zone").text(output);
               })
               $(".post_it").click(function(){
-                // FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "MarkovMe"}, function(response){
-                  FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
-                    if (!response || response.error) {
-                      alert("Error occured");
-                    // console.log(response);
-                  } else {
-                      // console.log($(".post_zone").text());
-                      $(".new_post_zone").text($(".post_zone").text());
-                      $(".new_post").show();
-                      $(".new_post_label").show(); 
-                    }
+
+
+                  // FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
+                  //   if (!response || response.error) {
+                  //     alert("Error occured");
+                  //   // console.log(response);
+                  // } else {
+                  //     // console.log($(".post_zone").text());
+                  //     $(".new_post_zone").text($(".post_zone").text());
+                  //     $(".new_post").show();
+                  //     $(".new_post_label").show(); 
+                  //   }
+                  // });
+
+                  FB.ui({
+                    method: 'feed',
+                    link: 'http://joehaaga.xyz/MarkovMe/',
+                    caption: $(".post_zone").text(),
+                  }, function(response){
+                    window.alert("Status posted!");
                   });
+
+
                 });
               // var title = make_title(3 + Math.floor(3 * Math.random()));
               // $("body").append("<p>"+title+"</p>");
