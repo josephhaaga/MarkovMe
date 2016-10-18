@@ -160,21 +160,16 @@
                 // $(".post_zone").text(title);
                 var output = model.generate(Math.floor(average_length) + Math.floor(average_length * Math.random()));
                 $(".post_zone").text(output);
+
+                ga('send', {
+                  hitType: 'event',
+                  eventCategory: 'MarkovMe',
+                  eventAction: 'generate',
+                  eventLabel: 'Generate Status'
+                });
+
               })
               $(".post_it").click(function(){
-
-
-                  // FB.api("/me/feed", "post", {message: $(".post_zone").text(), source: "http://joehaaga.xyz/MarkovMe"}, function(response){
-                  //   if (!response || response.error) {
-                  //     alert("Error occured");
-                  //   // console.log(response);
-                  // } else {
-                  //     // console.log($(".post_zone").text());
-                  //     $(".new_post_zone").text($(".post_zone").text());
-                  //     $(".new_post").show();
-                  //     $(".new_post_label").show(); 
-                  //   }
-                  // });
 
                   FB.ui({
                     method: 'feed',
@@ -184,6 +179,13 @@
                     description: 'A status automagically generated from my posts'
                   }, function(response){
                     // window.alert("Status posted!");
+                  });
+
+                  ga('send', {
+                    hitType: 'event',
+                    eventCategory: 'MarkovMe',
+                    eventAction: 'share',
+                    eventLabel: 'Share Status'
                   });
 
 
